@@ -1,7 +1,7 @@
 //Logger del sistema. Utiliza principalmente bluetooth. Tiene muy poca prioridad
 
 #pragma once
-#include <stdint.h>
+#include <Arduino.h>
 
 
         //Función para enviar un CHAR a través de bluetooth
@@ -10,3 +10,5 @@
         void inicializarLogger();
         //Función para enviar un STRING a través de bluetooth
         void enviarLog(char* mensaje); 
+
+        void enviarString(String str);

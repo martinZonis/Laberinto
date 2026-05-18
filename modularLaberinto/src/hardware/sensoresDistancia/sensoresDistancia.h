@@ -3,6 +3,7 @@
 // NO SE TIENE QUE EXPORTAR EL OBJETO NI NADA, SOLAMENTE EL STRUCT DEFINIDO EN LAS PRIMERAS LINEAS. 
 
 #pragma once
+//https://github.com/pololu/vl53l0x-arduino
 
 #include <Arduino.h>
 #include <VL53L0X.h> //Biblioteca de Pololu para el sensor de distancia VL53L0X

@@ -1,6 +1,18 @@
 #include "logger.h"
 #include <Arduino.h>
+#include <BluetoothSerial.h>
 
-void logger::enviarCelda(uint8_t celda){
-    Serial.write(celda);
+BluetoothSerial SerialBT;
+
+void enviarCelda(uint8_t celda){
+    SerialBT.write(celda);
+}
+
+void enviarString(String str){
+    SerialBT.println(str);
+}
+
+void inicializarLogger(){
+    SerialBT.begin("Magnesio Aceituna");
+    Serial.begin(115200);
 }
