@@ -25,22 +25,19 @@ void posicionFinal(uint8_t X, uint8_t Y){
 
 void paredNorte(uint8_t X, uint8_t Y){
     mapa[X][Y] |= 0b00010000;
-    enviarLog(char* ["Pared Norte detectada en celda (" + String(X) + ", " + String(Y) + ")"]);
 }
 
 void paredSur(uint8_t X, uint8_t Y){
     mapa[X][Y] |= 0b00001000;
-    enviarLog(char* ["Pared Sur detectada en celda (" + String(X) + ", " + String(Y) + ")"]);
+   
 }
 
 void paredEste(uint8_t X, uint8_t Y){
     mapa[X][Y] |= 0b00000100;
-    enviarLog(char* ["Pared Este detectada en celda (" + String(X) + ", " + String(Y) + ")"]);
 }
 
 void paredOeste(uint8_t X, uint8_t Y){
     mapa[X][Y] |= 0b00000010;
-    enviarLog(char* ["Pared Oeste detectada en celda (" + String(X) + ", " + String(Y) + ")"]);
 }
 
 //============================================

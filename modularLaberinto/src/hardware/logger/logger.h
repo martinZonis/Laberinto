@@ -3,7 +3,6 @@
 #pragma once
 #include <Arduino.h>
 
-
         //Función para enviar un CHAR a través de bluetooth
         void enviarCelda(uint8_t celda);
         //Función para inicializar el bluetooth, llamar en el main.

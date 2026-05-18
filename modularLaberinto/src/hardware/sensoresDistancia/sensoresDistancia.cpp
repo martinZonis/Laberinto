@@ -2,6 +2,10 @@
 #include <Arduino.h>
 #include <VL53L0X.h> 
 #include "config.h"
+//LAS REFERENCIAS DE STM ELECTRONICS SON LAS DE LA API FUENTE
+//ESTOY USANDO UNA BIBLOTECA DE POLOLU QUE USA ESA REFERENCIA
+//https://github.com/pololu/vl53l0x-arduino/blob/master/README.md
+
 
 VL53L0X sensorDer, sensorIzq, sensorCent;
 
@@ -49,3 +53,17 @@ void inicializacionSensoresDist(){
   sensorIzq.setAddress(adressIzq);
   sensorIzq.startContinuous(0);
 }
+
+sensado actualizarSensado(){
+  sensado lecturaAct = {0,0,0};
+  if((sensorIzq.readReg(VL53L0X::RESULT_INTERRUPT_STATUS) & 0x07) != 0){
+    lecturaAct.distanciaIzq = sensorIzq.readRangeContinuousMillimeters();
+  }
+  if((sensorCent.readReg(VL53L0X::RESULT_INTERRUPT_STATUS) & 0x07) != 0){
+    lecturaAct.distanciaCent = sensorCent.readRangeContinuousMillimeters();
+  }
+  if((sensorDer.readReg(VL53L0X::RESULT_INTERRUPT_STATUS) & 0x07) != 0){
+    lecturaAct.distanciaDer = sensorDer.readRangeContinuousMillimeters();
+  }
+  return lecturaAct;
+} 

@@ -16,3 +16,8 @@ void inicializarLogger(){
     SerialBT.begin("Magnesio Aceituna");
     Serial.begin(115200);
 }
+
+bool cambioDeCelda(){
+    if(SerialBT.available()>0){ return true;} else { return false;}
+}
+

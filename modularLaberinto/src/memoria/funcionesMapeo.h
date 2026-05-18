@@ -12,8 +12,22 @@
 #include <stdint.h>
 #include "config.h"
 
+enum ORIENTACION{
+    NADA,
+    NORTE,
+    SUR,
+    ESTE,
+    OESTE,
+};
+
+struct POSICION{
+    uint8_t X;
+    uint8_t Y;
+    uint8_t orientacion;
+};
+
 //Carga que la celda está visitada
-    void  celdaVisitada(uint8_t X, uint8_t Y);
+    void celdaVisitada(uint8_t X, uint8_t Y);
     //Carga que la celda está bloqueada (es decir que fue visitada más de una vez)
     void celdaBloqueada(uint8_t X, uint8_t Y);
     //Carga que la celda está desbloqueada

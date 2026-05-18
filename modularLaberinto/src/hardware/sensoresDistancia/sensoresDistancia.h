@@ -14,7 +14,7 @@ VL53L0X sensorFront, sensorDer, sensorIzq;
 //Struct para la medición de sensado
  
 struct sensado {
-    uint16_t distanciaFront;
+    uint16_t distanciaCent;
     uint16_t distanciaDer;
     uint16_t distanciaIzq;
 };
@@ -25,4 +25,4 @@ struct sensado {
 void inicializacionSensoresDist();
 
 //Función para medir la distancia, llamar en el main. Devuelve un struct con las tres distancias medidas.
-sensado medirDistancia();
+sensado actualizarSensado();
