@@ -13,6 +13,12 @@
 #define UMBRAL_LECTURA 100
 
 //===================
+//     PINES
+//===================
+
+#define BOTON 5 //cambiar
+
+//===================
 // PINES VL53L0X
 //===================
 #define xshutPinDer 26

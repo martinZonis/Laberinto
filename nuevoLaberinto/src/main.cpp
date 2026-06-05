@@ -5,14 +5,8 @@
 #include "hardware/sensorPiso/sensorPiso.h"
 #include "memoria/funcionesMapeo.h"
 #include "hardware/movimiento/PID.h"
+#include "maquinaDeEstados/maquinaDeEstados.h"
 
-//==============================================================
-//                CREAMOS EL MANEJO DE TAREAS
-//==============================================================
-
-TaskHandle_t taskOneMovimiento = NULL;
-TaskHandle_t taskTwoDecision = NULL;
-TaskHandle_t taskThreeUART = NULL;
 
 //==============================================================
 //                CREACIÓN DE VARIABLES GLOBALES
@@ -20,7 +14,9 @@ TaskHandle_t taskThreeUART = NULL;
 
 sensado sensadoActual = {0,0,0};
 POSICION posicionActual = {X_START,Y_START, NORTE};
-
+ESTADOS estadoActual = ESPERA;
+uint32_t tiempoAnterior = 0;
+uint8_t contador = 0;
 
 //==============================================================
 //                     VOID SETUP
@@ -36,7 +32,47 @@ void setup (){
 //==============================================================
 
 void loop(){
-  vTaskDelete(NULL);
+  switch(estadoActual){
+      uint8_t botonPressed = digitalRead(BOTON);  
+      case ESPERA: {
+        //POR AHORA SIMPLEMENTE ESPERA, NO HACE NADA
+        if(botonPressed == LOW){
+          estadoActual = SWITCHEAR_ESTADO;
+          tiempoAnterior = millis();
+        }
+      };
+
+      case SWITCHEAR_ESTADO: {
+        if(botonPressed == LOW){
+          contador = contador + 1;
+        }
+        if((millis() - tiempoAnterior) == 5000){
+          if(contador == 1){
+            estadoActual = CALIBRAR;
+          } else if (contador == 2){
+            estadoActual = SEGUNDO_RECORRIDO;
+          } else if (contador == 0){
+            estadoActual = ESPERA;
+          } else {
+            estadoActual = PRIMER_RECORRIDO;
+          }
+        }
+      };
+
+      case CALIBRAR: {
+        calibrar();
+        estadoActual = ESPERA;
+      };
+      case PRIMER_RECORRIDO: {
+        primerRecorrido();
+        if(salirDelLoop)
+          estadoActual = ESPERA;
+      };
+      case SEGUNDO_RECORRIDO: {
+        segundoRecorrido();
+        estadoActual = ESPERA;
+      };
+  }
 }
 
 //==============================================================
@@ -49,18 +85,3 @@ void loop(){
 */
 //==============================================================
 
-void taskOneMovimiento(void *parameter){
-  for(;;){
-    //Actualiza sensores
-    sensadoActual = actualizarSensado(); //Falta la lectura del sensor de piso
-    calcularDiferencialPID();
-    
-    //Lee queue de movimiento
-    //Cambio en el puente H
-  }
-}
-
-void taskTwoDecision(void *parameter){
-  //Lee ultimo sensado (es global la variable)
-
-}
