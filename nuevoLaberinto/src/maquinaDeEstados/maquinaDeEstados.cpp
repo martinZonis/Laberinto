@@ -1,5 +1,6 @@
 #include "maquinaDeEstados.h"
 #include "main.h"
+#include "hardware/movimiento/pid.h"
 
 void calibrar(){
     bool salirDelLoop = false; //Acción bloqueante
