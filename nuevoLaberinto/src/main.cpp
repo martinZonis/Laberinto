@@ -7,7 +7,6 @@
 #include "hardware/movimiento/PID.h"
 #include "maquinaDeEstados/maquinaDeEstados.h"
 
-
 //==============================================================
 //                CREACIÓN DE VARIABLES GLOBALES
 //==============================================================
@@ -17,7 +16,7 @@ POSICION posicionActual = {X_START,Y_START, NORTE};
 ESTADOS estadoActual = ESPERA;
 uint32_t tiempoAnterior = 0;
 uint8_t contador = 0;
-
+bool salirDelLoop = false;
 //==============================================================
 //                     VOID SETUP
 //==============================================================
@@ -65,8 +64,11 @@ void loop(){
       };
       case PRIMER_RECORRIDO: {
         primerRecorrido();
-        if(salirDelLoop)
+        if(salirDelLoop){
           estadoActual = ESPERA;
+        } else {
+          estadoActual = PRIMER_RECORRIDO;
+        }
       };
       case SEGUNDO_RECORRIDO: {
         segundoRecorrido();

@@ -1,11 +1,13 @@
 #pragma once
 
 #include <arduino.h>
+#include "hardware/sensoresDistancia/sensoresDistancia.h"
 
 //=============================
 // VARIABLES GLOBALES EXTERN
 //=============================
 extern sensado sensadoActual;
+extern bool salirDelLoop;
 
 void calibrar();
 void primerRecorrido();
@@ -22,7 +24,7 @@ enum SUBMAQUINA_CALIBRAR {
     QTR,
     MOTOR_IZQ,
     MOTOR_DER
-};
+}; SUBMAQUINA_CALIBRAR subestadoActualCalibrar = SENSOR_IZQ;
 
 //=============================
 // ESTADOS DE PRIMER RECORRIDO
@@ -33,4 +35,4 @@ enum SUBMAQUINA_PRIMER_RECORRIDO {
     ENTRE_CELDAS,
     MAPEO,
     LLEGADA,
-};
+}; SUBMAQUINA_PRIMER_RECORRIDO subestadoActualPrimerRecorrido = PARTIDA;
