@@ -1,17 +1,15 @@
 #include <Arduino.h>
 
 // Definición de pines para el Motor A
-#define PWMA 18  // Pin de PWM para Motor A
-#define AIN1 19  // Dirección 1 para Motor A
-#define AIN2 21  // Dirección 2 para Motor A
+#define PWMA 32  // Pin de PWM para Motor A
+#define AIN1 33  // Dirección 1 para Motor A
+#define AIN2 25  // Dirección 2 para Motor A
 
 // Definición de pines para el Motor B
-#define PWMB 5   // Pin de PWM para Motor B
-#define BIN1 16  // Dirección 1 para Motor B
-#define BIN2 17  // Dirección 2 para Motor B
+#define PWMB 14   // Pin de PWM para Motor B
+#define BIN1 27  // Dirección 1 para Motor B
+#define BIN2 26  // Dirección 2 para Motor B
 
-// Pin de Standby (debe estar en ALTO para que los motores funcionen)
-#define STBY 22
 
 // Configuración de PWM
 #define PWM_FREQ 5000
@@ -30,11 +28,7 @@ void setup() {
   pinMode(AIN2, OUTPUT);
   pinMode(BIN1, OUTPUT);
   pinMode(BIN2, OUTPUT);
-  pinMode(STBY, OUTPUT);
-
-  // Habilitar el driver de motores
-  digitalWrite(STBY, HIGH);
-
+  
   // Configurar PWM para ESP32
   ledcSetup(PWM_CHANNEL_A, PWM_FREQ, PWM_RESOLUTION);
   ledcAttachPin(PWMA, PWM_CHANNEL_A);
@@ -83,6 +77,6 @@ void loop() {
   digitalWrite(BIN1, LOW);
   digitalWrite(BIN2, LOW);
   ledcWrite(PWM_CHANNEL_B, 0);
-
+ 
   delay(2000);
 }
